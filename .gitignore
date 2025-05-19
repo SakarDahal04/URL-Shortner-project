@@ -1,0 +1,28 @@
+# Python cached and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+env/
+myenv/
+
+# Django Specific Files
+db.sqlite
+media/
+*.log
+*.pot
+staticfiles/
+static_root/
+
+# Environment variables 
+.env
+.env.*
+
+# Migrations Files
+**/migrations/*.py
+**/migrations/*.pyc
+!**/migrations/__init__.py
+

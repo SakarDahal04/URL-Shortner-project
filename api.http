@@ -1,0 +1,57 @@
+###
+GET http://localhost:8000/account/ HTTP/1.1
+
+# Registration API
+###
+POST http://localhost:8000/account/register/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "sakar1234dahal@gmail.com",
+    "name": "Sakar Dahal",
+    "password": "admin",
+    "confirm_password": "admin"
+}
+
+# Access and Refresh Token Obtain:
+###
+POST http://localhost:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "sakar1234dahal@gmail.com",
+    "password": "newpassword123"
+}
+
+# Login API
+###
+POST http://localhost:8000/account/login/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "sakar1234dahal@gmail.com",
+    "password": "newpassword123"
+}
+
+# Password Reset Link Send
+###
+POST http://localhost:8000/account/password-reset/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "sakar1234dahal@gmail.com"
+}
+
+
+###
+# Example of the frontend request from the mail. Attach the extra info in the request again while sending request for password-reset POST req
+# https://your-frontend.com/reset-password/confirm/MTE/cq2awy-f1a44fad0f32770e1346d427fed1e1b4/
+
+###
+POST http://localhost:8000/account/password-reset-confirm/MTE/cq2awy-f1a44fad0f32770e1346d427fed1e1b4/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "new_password1": "newpassword123",
+    "new_password2": "newpassword123"
+}
