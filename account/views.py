@@ -1,3 +1,5 @@
+from django.shortcuts import render
+
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -20,6 +22,9 @@ from account.serializers import (
 )
 from account.utils import send_activation_email, send_password_reset_email
 
+
+def index(request):
+    return render(request, 'account/home.html')
 
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
