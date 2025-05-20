@@ -18,8 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = os.environ.get("DEBUG", "False").lower() == "True"
+DEBUG = True
+# DEBUG = os.environ.get("DEBUG", "False").lower() == "True"
 
 # ALLOWED_HOSTS = ['localhost','.vercel.app', '127.0.0.1']
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split()
