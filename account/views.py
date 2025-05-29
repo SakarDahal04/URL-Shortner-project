@@ -21,13 +21,14 @@ from account.serializers import (
     LoginSerializer,
     PasswordResetSerializer,
     UserSerializer,
-    ChangePasswordSerializer
+    ChangePasswordSerializer,
 )
 from account.utils import send_activation_email, send_password_reset_email
 
 
 def index(request):
-    return render(request, 'account/home.html')
+    return render(request, "account/home.html")
+
 
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -49,8 +50,8 @@ class UserCreateAPIView(generics.CreateAPIView):
         activation_url = request.build_absolute_uri(activation_path)
 
         activation_url = (
-                f"{os.environ.get('FRONTEND_URL')}/activate-account/{uidb64}/{token}/"
-            )
+            f"{os.environ.get('FRONTEND_URL')}/activate-account/{uidb64}/{token}/"
+        )
 
         # Send email
         send_activation_email(user.email, activation_url)
@@ -154,15 +155,25 @@ class LoginAPIView(APIView):
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
-        if not user.is_active:
-            return Response(
-                {"detail": "Account is Inactive. Please activate your account"},
-                status=status.HTTP_403_FORBIDDEN,
-            )
-
         user = authenticate(request, email=email, password=password)
 
         if user is not None:
+
+            if not user.is_active:
+                uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+                token = default_token_generator.make_token(user)
+
+                activation_url = f"{os.environ.get('FRONTEND_URL')}/activate-account/{uidb64}/{token}/"
+
+                send_activation_email(user.email, activation_url)
+
+                return Response(
+                    {
+                        "detail": "Account is Inactive. Please activate your account. Activation email has been sent."
+                    },
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+
             refresh = RefreshToken.for_user(user)
 
             login(request, user)
@@ -194,9 +205,7 @@ class PasswordResetAPIView(APIView):
         if user:
             uidb64 = urlsafe_base64_encode(force_bytes(user.id))
             token = default_token_generator.make_token(user)
-            frontend_reset_url = (
-                f"{os.environ.get('FRONTEND_URL')}/reset-password/confirm/{uidb64}/{token}/"
-            )
+            frontend_reset_url = f"{os.environ.get('FRONTEND_URL')}/reset-password/confirm/{uidb64}/{token}/"
 
             # For the case if we use django frontend
             # reset_url = reverse(
@@ -246,6 +255,7 @@ class PasswordResetConfirmView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
+
 class UserUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -253,13 +263,18 @@ class UserUpdateAPIView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
-    
+
+
 class ChangePasswordView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = ChangePasswordSerializer(data=request.data, context={'request': request})
+        serializer = ChangePasswordSerializer(
+            data=request.data, context={"request": request}
+        )
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": "Password changed successfully."}, status=status.HTTP_200_OK)
+            return Response(
+                {"message": "Password changed successfully."}, status=status.HTTP_200_OK
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
