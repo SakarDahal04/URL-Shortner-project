@@ -70,8 +70,8 @@ Make sure you have the following installed:
         | POST    | `/api/token/`                                       | Login and get JWT token           |
         | POST    | `/api/token/refresh/`                               | Refresh JWT token                 |
         | POST    | `/account/password-reset/`                          | Request password reset email      |
-        | PATCH   | `/account/password-reset-confirm/<uidb64>/<token>/` | Reset password                    |
-        | PUT     | `/account/change-password/`                         | Change password (logged-in users) |
+        | POST    | `/account/password-reset-confirm/<uidb64>/<token>/` | Reset password                    |
+        | POST    | `/account/change-password/`                         | Change password (logged-in users) |
         | POST    | `/account/user-update/`                             | update user profile information   |
 
 
