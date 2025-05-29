@@ -38,33 +38,33 @@ Make sure you have the following installed:
 
 2. **Create Virtual Environment and Install Dependencies**
 
-    python -m venv venv
-    source venv/bin/activate   # On Windows: venv\Scripts\activate
-    pip install -r requirements.txt
+        python -m venv venv
+        source venv/bin/activate   # On Windows: venv\Scripts\activate
+        pip install -r requirements.txt
 
 3. **Environment Variables**
 
-    SECRET_KEY=your-django-secret-key
-    DEBUG=True
-    ALLOWED_HOSTS=your_backend_domain localhost 127.0.0.1
-    EMAIL_HOST=smtp.yourprovider.com
-    EMAIL_PORT=587
-    EMAIL_FROM=emai@example.com
-    EMAIL_HOST_USER=your-email@example.com
-    EMAIL_HOST_PASSWORD=your-email-password
-    EMAIL_USE_TLS=True
-    FRONTEND_URL=http://localhost:5173
+        SECRET_KEY=your-django-secret-key
+        DEBUG=True
+        ALLOWED_HOSTS=your_backend_domain localhost 127.0.0.1
+        EMAIL_HOST=smtp.yourprovider.com
+        EMAIL_PORT=587
+        EMAIL_FROM=emai@example.com
+        EMAIL_HOST_USER=your-email@example.com
+        EMAIL_HOST_PASSWORD=your-email-password
+        EMAIL_USE_TLS=True
+        FRONTEND_URL=http://localhost:5173
 
 4. **Run Migrations and Start Server**
 
-    python manage.py makemigrations
-    python manage.py migrate
-    python manage.py runserver
+        python manage.py makemigrations
+        python manage.py migrate
+        python manage.py runserver
 
     API Endpoints Overview:
 
         | Method  | Endpoint                                            | Description                       |
-        | ------- | --------------------------------------------        | --------------------------------- |
+        | ------- | ----------------------------------------------------| --------------------------------- |
         | POST    | `/account/register/`                                | Register a new user               |
         | GET     | `/account/activate/<uidb64>/<token>/`               | Activate account via email        |
         | POST    | `/api/token/`                                       | Login and get JWT token           |
@@ -84,11 +84,13 @@ Make sure you have the following installed:
     - CORS Headers
 
 6. **🙋‍♂️ About Me**
+
     Hi, I'm Sakar Dahal, the creator of this site. I'm passionate about web development and built this project to understand how secure full-stack authentication systems work in practice.
 
     Frontend repo: [React Frontend](https://github.com/SakarDahal04/URL-Shortner-project)
 
 7. **Contact**
+
     Feel free to contact with me via [LinkedIn](https://www.linkedin.com/in/sakar-dahal-30a560277/)
 
 
