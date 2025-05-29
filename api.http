@@ -64,25 +64,25 @@ Content-Type: application/json
 ###
 POST http://localhost:8000/url/shorten/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NzMzMjEyLCJpYXQiOjE3NDc3MzI5MTIsImp0aSI6ImMzOTJhZDU3MWFiMDQ0Yzk4YzQyYjliMmY2NWRiOTg3IiwidXNlcl9pZCI6MTN9.R4wHKxVTOpK8JU17_36XDL377YFv_xK1BslQrn8T1wE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MzI2ODcwLCJpYXQiOjE3NDgzMjQ0NzAsImp0aSI6IjRkZjBmODQyYWY4MjRmZTliZjRjZGRmYTc2YmEyZGNmIiwidXNlcl9pZCI6MTR9.6r305JDPhArZrrKgdsC2NOZugst6eZjwpnqajuuVVCU
 
 {
-    "original_url": "https://www.youtube.com"
+    "original_url": "https://www.dj4e.com"
 }
 
 # Redirecting to the orginal page
 ###
-GET http://localhost:8000/url/redirect/BS0HEA/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NzA4MDQ3LCJpYXQiOjE3NDc3MDc3NDcsImp0aSI6IjY1N2QwOGQzOTI4ZjQzYTdiZjJiNWZhYTE3ZjgyZWQ3IiwidXNlcl9pZCI6MTF9.-ERgVGVfINp2Tkyszxw0xtEfbHdMXk8yyMRrUPK6i3s
+GET http://localhost:8000/url/redirect/zdm0K8/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MzI5ODk4LCJpYXQiOjE3NDgzMjc0OTgsImp0aSI6ImMwNjU4Y2UzMzIyNzQ3NzA5ZGRlYzI3NGIyYmM2NDUwIiwidXNlcl9pZCI6MTR9.PrxOjeEScvb_VX2yYytlWuluOgEbpz9pls5-Wic8YEo
 
 ###
 GET http://localhost:8000/url/url_list/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NzA5MDIwLCJpYXQiOjE3NDc3MDg3MjAsImp0aSI6IjEyOGJlN2IzNDBlZTQ2NDlhNWY4NzQ2NWYwYTE0NDllIiwidXNlcl9pZCI6MTN9.HrYc5bzKXuDCu1y2_gblV8FK2uMneNmYLwSrIYm_EUM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MzI5ODk4LCJpYXQiOjE3NDgzMjc0OTgsImp0aSI6ImMwNjU4Y2UzMzIyNzQ3NzA5ZGRlYzI3NGIyYmM2NDUwIiwidXNlcl9pZCI6MTR9.PrxOjeEScvb_VX2yYytlWuluOgEbpz9pls5-Wic8YEo
 
 # Get one of the url instance
 ###
-GET http://localhost:8000/url/2/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3NzMzMTI3LCJpYXQiOjE3NDc3MzI4MjcsImp0aSI6ImEwNGUzMGEwMmU5MjRiMWViMjlkNWRhMWNjMjY5MTVkIiwidXNlcl9pZCI6MTF9.kyQcjBDl7dlt0qQL7KDKY7J_ETh5LNh-tcavZFLr7Jk
+GET http://localhost:8000/url/12/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MzI5ODk4LCJpYXQiOjE3NDgzMjc0OTgsImp0aSI6ImMwNjU4Y2UzMzIyNzQ3NzA5ZGRlYzI3NGIyYmM2NDUwIiwidXNlcl9pZCI6MTR9.PrxOjeEScvb_VX2yYytlWuluOgEbpz9pls5-Wic8YEo
 
 ###
 PUT http://localhost:8000/url/3/ HTTP/1.1

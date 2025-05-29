@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import os
 
 from rest_framework import generics, status
 from rest_framework.response import Response
@@ -19,6 +20,8 @@ from account.serializers import (
     RegistrationSerializer,
     LoginSerializer,
     PasswordResetSerializer,
+    UserSerializer,
+    ChangePasswordSerializer
 )
 from account.utils import send_activation_email, send_password_reset_email
 
@@ -44,6 +47,10 @@ class UserCreateAPIView(generics.CreateAPIView):
         # Build activation URL with request
         activation_path = reverse("activate", kwargs={"uidb64": uidb64, "token": token})
         activation_url = request.build_absolute_uri(activation_path)
+
+        activation_url = (
+                f"{os.environ.get('FRONTEND_URL')}/activate-account/{uidb64}/{token}/"
+            )
 
         # Send email
         send_activation_email(user.email, activation_url)
@@ -187,9 +194,8 @@ class PasswordResetAPIView(APIView):
         if user:
             uidb64 = urlsafe_base64_encode(force_bytes(user.id))
             token = default_token_generator.make_token(user)
-
             frontend_reset_url = (
-                f"https://your-frontend.com/reset-password/confirm/{uidb64}/{token}/"
+                f"{os.environ.get('FRONTEND_URL')}/reset-password/confirm/{uidb64}/{token}/"
             )
 
             # For the case if we use django frontend
@@ -239,3 +245,21 @@ class PasswordResetConfirmView(APIView):
                 {"detail - Form errors": form.errors},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+class UserUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+    
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = ChangePasswordSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Password changed successfully."}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

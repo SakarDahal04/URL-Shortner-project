@@ -4,6 +4,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework.exceptions import AuthenticationFailed
 
 from django.contrib.auth import authenticate
+from django.contrib.auth.password_validation import validate_password
 
 from account.models import User
 
@@ -29,7 +30,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         attrs = super().validate(attrs)
 
         if attrs.get("password") != attrs.get("confirm_password"):
-            serializers.ValidationError(
+            raise serializers.ValidationError(
                 {"confirm_password": "Password and Confirm Password must match"}
             )
 
@@ -83,3 +84,32 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         data = super().validate(attrs)
         return data
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'name']
+
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+    confirm_password = serializers.CharField(required=True)
+
+    def validate_old_password(self, value):
+        user = self.context['request'].user
+        if not user.check_password(value):
+            raise serializers.ValidationError("Old password is incorrect.")
+        return value
+    
+    def validate(self, attrs):
+        if attrs['new_password'] != attrs['confirm_password']:
+            raise serializers.ValidationError({"confirm_password": "Passwords do not match."})
+        validate_password(attrs['new_password'], self.context['request'].user)
+        return attrs
+    
+    def save(self, **kwargs):
+        user = self.context['request'].user
+        user.set_password(self.validated_data['new_password'])
+        user.save()
+        return user
