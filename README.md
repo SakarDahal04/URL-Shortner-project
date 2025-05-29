@@ -72,7 +72,7 @@ Make sure you have the following installed:
         | POST    | `/account/password-reset/`                          | Request password reset email      |
         | POST    | `/account/password-reset-confirm/<uidb64>/<token>/` | Reset password                    |
         | POST    | `/account/change-password/`                         | Change password (logged-in users) |
-        | POST    | `/account/user-update/`                             | update user profile information   |
+        | GET/PUT | `/account/user-update/`                             | got or update user information    |
 
 
 5. **Technologies Used**
