@@ -13,11 +13,11 @@ Welcome to the backend of my full-stack authentication project built using Djang
 
 ## 📁 Project Structure
 
-├── accounts/       # Custom user model and authentication logic
-├── url_shortner/   # Project settings and URLs
-├── shorten_url/    # URL shortening logc
-├── templates/
-├── manage.py
+        ├── accounts/       # Custom user model and authentication logic
+        ├── url_shortner/   # Project settings and URLs
+        ├── shorten_url/    # URL shortening logc
+        ├── templates/
+        ├── manage.py
 
 
 ## 🚀 Getting Started
@@ -34,7 +34,7 @@ Make sure you have the following installed:
 
 1. **Clone the Repository**
 
-    git clone https://github.com/SakarDahal04/URL-Shortner-project.git
+        git clone https://github.com/SakarDahal04/URL-Shortner-project.git
 
 2. **Create Virtual Environment and Install Dependencies**
 
