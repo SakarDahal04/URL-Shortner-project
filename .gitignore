@@ -11,6 +11,7 @@ myenv/
 
 # Django Specific Files
 db.sqlite
+db.sqlite3
 media/
 *.log
 *.pot
