@@ -87,7 +87,7 @@ Make sure you have the following installed:
 
     Hi, I'm Sakar Dahal, the creator of this site. I'm passionate about web development and built this project to understand how secure full-stack authentication systems work in practice.
 
-    Frontend repo: [React Frontend](https://github.com/SakarDahal04/URL-Shortner-project)
+    Frontend repo: [React Frontend](https://github.com/SakarDahal04/URL-Shortner-project----Frontend)
 
 7. **Contact**
 
